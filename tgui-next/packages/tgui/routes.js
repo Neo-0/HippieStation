@@ -139,7 +139,7 @@ const ROUTES = {
   },
   centcom_podlauncher: {
     component: () => CentcomPodLauncher,
-    scrollable: false,
+    scrollable: true,
   },
   acclimator: {
     component: () => ChemAcclimator,

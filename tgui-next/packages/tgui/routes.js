@@ -194,7 +194,7 @@ const ROUTES = {
   },
   chem_synthesizer: {
     component: () => ChemDebugSynthesizer,
-    scrollable: false,
+    scrollable: true,
   },
   synthesizer: {
     component: () => ChemSynthesizer,

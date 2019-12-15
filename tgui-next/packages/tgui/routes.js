@@ -122,7 +122,7 @@ const ROUTES = {
   },
   atmos_mixer: {
     component: () => AtmosMixer,
-    scrollable: true,
+    scrollable: false,
   },
   atmos_pump: {
     component: () => AtmosPump,
@@ -130,7 +130,7 @@ const ROUTES = {
   },
   borgopanel: {
     component: () => BorgPanel,
-    scrollable: false,
+    scrollable: true,
   },
   brig_timer: {
     component: () => BrigTimer,
@@ -194,7 +194,7 @@ const ROUTES = {
   },
   chem_synthesizer: {
     component: () => ChemDebugSynthesizer,
-    scrollable: true,
+    scrollable: false,
   },
   synthesizer: {
     component: () => ChemSynthesizer,

@@ -114,7 +114,7 @@ const ROUTES = {
   },
   atmos_control: {
     component: () => AtmosControlConsole,
-    scrollable: true,
+    scrollable: false,
   },
   atmos_filter: {
     component: () => AtmosFilter,

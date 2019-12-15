@@ -266,7 +266,7 @@ const ROUTES = {
   },
   medical_kiosk: {
     component: () => MedicalKiosk,
-    scrollable: false,
+    scrollable: true,
   },
   mint: {
     component: () => Mint,

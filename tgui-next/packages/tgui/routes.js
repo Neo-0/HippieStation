@@ -238,7 +238,7 @@ const ROUTES = {
   },
   gravity_generator: {
     component: () => GravityGenerator,
-    scrollable: false,
+    scrollable: true,
   },
   gulag_item_reclaimer: {
     component: () => GulagItemReclaimer,

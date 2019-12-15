@@ -122,7 +122,7 @@ const ROUTES = {
   },
   atmos_mixer: {
     component: () => AtmosMixer,
-    scrollable: false,
+    scrollable: true,
   },
   atmos_pump: {
     component: () => AtmosPump,

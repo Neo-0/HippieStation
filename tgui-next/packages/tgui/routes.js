@@ -130,7 +130,7 @@ const ROUTES = {
   },
   borgopanel: {
     component: () => BorgPanel,
-    scrollable: true,
+    scrollable: false,
   },
   brig_timer: {
     component: () => BrigTimer,

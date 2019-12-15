@@ -94,7 +94,7 @@ const ROUTES = {
   },
   ai_airlock: {
     component: () => AiAirlock,
-    scrollable: false,
+    scrollable: true,
   },
   airalarm: {
     component: () => AirAlarm,

@@ -245,7 +245,7 @@
 				message_admins("[key_name_admin(usr)] [new_perma ? "stopped" : "started"] the arrivals shuttle")
 				log_admin("[key_name(usr)] [new_perma ? "stopped" : "started"] the arrivals shuttle")
 			else
-				to_chat(usr, "<span class='admin'>There is no arrivals shuttle</span>")
+				to_chat(usr, "<span class='admin'>There is no arrivals shuttle.</span>")
 		if("showailaws")
 			if(!check_rights(R_ADMIN))
 				return
@@ -424,7 +424,7 @@
 						if(droptype == "Yes")
 							ADD_TRAIT(I, TRAIT_NODROP, ADMIN_TRAIT)
 				else
-					to_chat(H, "You're not kawaii enough for this.")
+					to_chat(H, "<span class='warning'>You're not kawaii enough for this!</span>")
 
 		if("whiteout")
 			if(!check_rights(R_FUN))
@@ -469,7 +469,7 @@
 				if(is_station_level(W.z) && !istype(get_area(W), /area/bridge) && !istype(get_area(W), /area/crew_quarters) && !istype(get_area(W), /area/security/prison))
 					W.req_access = list()
 			message_admins("[key_name_admin(usr)] activated Egalitarian Station mode")
-			priority_announce("CentCom airlock control override activated. Please take this time to get acquainted with your coworkers.", null, 'hippiestation/sound/pyko/commandreport.ogg') // hippie -- pykoai
+			priority_announce("CentCom airlock control override activated. Please take this time to get acquainted with your coworkers.", null, 'sound/ai/commandreport.ogg') // beat
 
 		if("ancap")
 			if(!check_rights(R_FUN))
@@ -478,9 +478,9 @@
 			SSeconomy.full_ancap = !SSeconomy.full_ancap
 			message_admins("[key_name_admin(usr)] toggled Anarcho-capitalist mode")
 			if(SSeconomy.full_ancap)
-				priority_announce("The NAP is now in full effect.", null, 'hippiestation/sound/pyko/commandreport.ogg') // hippie -- pykoai
+				priority_announce("The NAP is now in full effect.", null, 'sound/ai/commandreport.ogg') // beat
 			else
-				priority_announce("The NAP has been revoked.", null, 'hippiestation/sound/pyko/commandreport.ogg') // hippie -- pykoai
+				priority_announce("The NAP has been revoked.", null, 'sound/ai/commandreport.ogg') // beat
 
 
 
@@ -627,7 +627,7 @@
 				var/list/prefs = settings["mainsettings"]
 
 				if (prefs["amount"]["value"] < 1 || prefs["portalnum"]["value"] < 1)
-					to_chat(usr, "Number of portals and mobs to spawn must be at least 1")
+					to_chat(usr, "<span class='warning'>Number of portals and mobs to spawn must be at least 1.</span>")
 					return
 
 				var/mob/pathToSpawn = prefs["typepath"]["value"]
@@ -635,7 +635,7 @@
 					pathToSpawn = text2path(pathToSpawn)
 
 				if (!ispath(pathToSpawn))
-					to_chat(usr, "Invalid path [pathToSpawn]")
+					to_chat(usr, "<span class='notice'>Invalid path [pathToSpawn].</span>")
 					return
 
 				var/list/candidates = list()

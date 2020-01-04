@@ -287,7 +287,7 @@ SUBSYSTEM_DEF(ticker)
 	SSdbcore.SetRoundStart()
 
 	to_chat(world, "<span class='notice'><B>Welcome to [station_name()], enjoy your stay!</B></span>")
-	SEND_SOUND(world, sound(pick('hippiestation/sound/AI/welcome1.ogg', 'hippiestation/sound/AI/welcome2.ogg'))) // hippie -- really should not be touching ticker, but it must be done.
+	SEND_SOUND(world, sound('sound/ai/welcome.ogg')) // beat -- removes pykoai
 
 	current_state = GAME_STATE_PLAYING
 	Master.SetRunLevel(RUNLEVEL_GAME)
@@ -373,7 +373,7 @@ SUBSYSTEM_DEF(ticker)
 	if(captainless)
 		for(var/mob/dead/new_player/N in GLOB.player_list)
 			if(N.new_character)
-				to_chat(N, "Captainship not forced on anyone.")
+				to_chat(N, "<span class='notice'>Captainship not forced on anyone.</span>")
 			CHECK_TICK
 
 /datum/controller/subsystem/ticker/proc/transfer_characters()

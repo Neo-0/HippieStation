@@ -132,14 +132,6 @@ GLOBAL_LIST_EMPTY(explosions)
 						shake_camera(M, 10, CLAMP(baseshakeamount*0.25, 0, 2.5))
 			EX_PREPROCESS_CHECK_TICK
 
-	//Pause the master controller HOLY FUCK YOU MADMAN THIS ACTUALLY MAKES EXPLOSIONS LAG SO MUCH LESS
-	/*if(max_range >= EXPLOSION_LAG_RANGE)//Nice
-		Master.processing = FALSE
-	else
-		var/postponeCycles = max(round(devastation_range),1)
-		SSlighting.postpone(postponeCycles)
-		SSmachines.postpone(postponeCycles)
-	*/
 	if(heavy_impact_range > 1)
 		var/datum/effect_system/explosion/E
 		if(smoke)
@@ -270,7 +262,8 @@ GLOBAL_LIST_EMPTY(explosions)
 					var/turf/UnexplodeT = Unexplode
 					UnexplodeT.explosion_level = 0
 				exploded_this_tick.Cut()
-		Master.processing = FALSE
+		if(max_range < 100) //otherwise game lags
+			Master.processing = FALSE
 	//unfuck the shit
 	for(var/Unexplode in exploded_this_tick)
 		var/turf/UnexplodeT = Unexplode
@@ -284,10 +277,7 @@ GLOBAL_LIST_EMPTY(explosions)
 		log_world("## DEBUG: Explosion([x0],[y0],[z0])(d[devastation_range],h[heavy_impact_range],l[light_impact_range]): Took [took] seconds.")
 
 	if(running)	//if we aren't in a hurry
-		//Machines which report explosions.
-		for(var/array in GLOB.doppler_arrays)
-			var/obj/machinery/doppler_array/A = array
-			A.sense_explosion(epicenter, devastation_range, heavy_impact_range, light_impact_range, took,orig_dev_range, orig_heavy_range, orig_light_range)
+		SEND_GLOBAL_SIGNAL(COMSIG_GLOB_EXPLOSION, epicenter, devastation_range, heavy_impact_range, light_impact_range, took, orig_dev_range, orig_heavy_range, orig_light_range)
 
 	++stopped
 	qdel(src)

@@ -15,16 +15,47 @@
 	held_items = list(null)
 	var/list/upgrades = list()
 
+/mob/living/simple_animal/remote_control/basic/Move()
+	check_dist()
+	. = ..()
+
 /mob/living/simple_animal/remote_control/basic/attackby(obj/item/I, mob/living/user, params)
-	if(I in upgrades)
-		return to_chat(user, "<span class='notice'>[src] already have this upgrade</span>")
-	else if(istype(I, /obj/item/rc_upgrade/mechanic_arms))
+	for(var/B in upgrades)
+		if(I == B)
+			to_chat(user, "<span class='warning'>[src] already have this upgrade!</span>")
+			return
+	/*if(I in upgrades)
+		to_chat(user, "<span class='warning'>[src] already have this upgrade!</span>")
+		return*/
+	if(istype(I, /obj/item/rc_upgrade/mechanic_arms))
 		var/obj/item/rc_upgrade/mechanic_arms/A = I
-		to_chat(user, "<span class='notice'>You succeful install [A] to [src]</span>")
+		to_chat(user, "<span class='notice'>You succeful install [A] to [src].</span>")
 		dextrous = TRUE
 		create_mob_hud()
-		upgrades += A
-		qdel(A)
+		upgrades.Add(A)
+		qdel(I)
+		return
+	else if(istype(I, /obj/item/rc_upgrade/range_upgrade))
+		var/obj/item/rc_upgrade/range_upgrade/A = I
+		to_chat(user, "<span class='notice'>You succeful install [A] to [src].</span>")
+		range = 15
+		upgrades.Add(A)
+		qdel(I)
+		return
+	else if(istype(I, /obj/item/rc_upgrade/range_upgrade/adv))
+		var/obj/item/rc_upgrade/range_upgrade/adv/A = I
+		to_chat(user, "<span class='notice'>You succeful install [A] to [src].</span>")
+		range = 20
+		upgrades.Add(A)
+		qdel(I)
+		return
+	else if(istype(I, /obj/item/rc_upgrade/speed_upgrade))
+		var/obj/item/rc_upgrade/speed_upgrade/A = I
+		to_chat(user, "<span class='notice'>You succeful install [A] to [src].</span>")
+		speed = -1
+		update_simplemob_varspeed()
+		upgrades.Add(A)
+		qdel(I)
 		return
 	return ..()
 
@@ -53,7 +84,7 @@
 		CtrlClickOn(A)
 		return
 
-	if(next_move > world.time) // in the year 2000...
+	if(next_move > world.time)
 		return
 
 	var/obj/item/W = get_active_held_item()

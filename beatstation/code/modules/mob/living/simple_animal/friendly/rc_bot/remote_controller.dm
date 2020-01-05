@@ -39,7 +39,9 @@
 		to_chat(user, "<span class='notice'>The remote isn't currently linked to anything. Use it on a controllable robot to sync the remote.</span>")
 		return
 	if(RC.wrapped)
-		to_chat(user, "<span class='notice'>You cannot use [src] while [RC] is wrapped!</span>")
+		to_chat(user, "<span class='warning'>You cannot use [src] while [RC] is wrapped!</span>")
+		return
+	if(!RC.check_dist())
 		return
 	if(linked && RC && !RC.wrapped)
 		RC.assume_control(user)

@@ -45,6 +45,7 @@
 	var/obj/item/drone_controller/remote
 	var/datum/action/innate/eject_rc/eject_act
 	var/wrapped = FALSE
+	var/range = 10
 	//var/hacked = FALSE
 
 /mob/living/simple_animal/remote_control/Initialize()
@@ -127,6 +128,14 @@
 			update_inv_hands()
 		else
 			ckey = pilot.ckey
+
+/mob/living/simple_animal/remote_control/proc/check_dist() // check the distance of the bot and the controller
+	if(get_dist(remote.loc, get_turf(src)) >= range)
+		to_chat(usr, "<span class='boldwarning'>The remote control robot is out of range!</span>")
+		eject_pilot()
+		return FALSE
+	else
+		return TRUE
 
 /mob/living/simple_animal/remote_control/emp_act(severity)
 	to_chat(src, "<span class='warning'>Bzzzzzzzzzt. Connection lost.</span>")
